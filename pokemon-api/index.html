@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Encounter</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous">
+	</script>
+
+</head>
+<body>
+    <div class="pokemons">
+        <div class="pokemonImage">
+            <img src="" alt="The image or sprite of the Pokemon you encountered!" class="img"/>
+        </div>
+        <div class="pokemonName">
+            <p id="name"></p>
+        </div>
+        <div class="pokemonType1">
+            <p id="type1"></p>
+        </div>
+        <div class="pokemonType2">
+            <p id="type2"></p>
+        </div>
+    </div>
+
+    <button onclick="getPokemon()">Encounter a Pokemon!</button>
+
+    <script>
+        function getRandomNumberForPokeAPI(){
+            // The "808" is just a safe maximum for how many Pokemon are currently in the API.
+            // When they add more Pokemon, that number should go up.
+            // Some newer Pokemon (numbers 808 and above) might be missing some data - 
+            // if that's the case, just change this number back to 808 instead of 894.
+            let suitableNumber = Math.floor(Math.random() * 894);
+            return suitableNumber;
+            
+            // You would then place this number in the PokeAPI url as per the API docs,
+            // using trusty ol' string interpolation.
+            // Like so:
+            // https://pokeapi.co/api/v2/pokemon/${getRandomNumberForPokeAPI()}
+        }
+
+        // Write your own JS after this line --------------------------------------
+        let pokemonName = document.getElementById("name")
+        let pokemonType1 = document.getElementById("type1")
+        let pokemonType2 = document.getElementById("type2")
+        let pokemonImage = document.querySelector("img")
+        let url = `https://pokeapi.co/api/v2/pokemon/${getRandomNumberForPokeAPI()}`
+        // -------------------------------------------------------------------------
+
+        // through axios :
+
+        const getPokemon = () => {
+            
+            axios.get(url)
+
+            .then(response => {return response.data})
+            .then(data => {
+                console.log(data)
+
+
+                for (let i = 0; i < 6; i++){
+
+                }
+
+                pokemonName.textContent = data.name
+                pokemonType1.textContent = data.types[0].type.name
+                if (data.types.length > 1){
+                    pokemonType2.textContent = data.types[1].type.name
+                }
+                console.log(data.types)
+                let imgUrl = ""
+                
+                if (data.sprites.front_default != null){
+                    imgUrl = data.sprites.front_default
+                } else {
+                    imgUrl = data.sprites.back_default
+                }
+                
+                pokemonImage.src = imgUrl
+            })
+            
+            .catch(err => console.log(err))
+        }
+
+        // ------------------------------------------------------------------------------
+
+        // // through fetch :
+        // const getPokemon = () => {
+
+        //     fetch(url)
+        //     .then(response => { return response.json()})
+        //     .then(data => {
+                
+        //         console.log(data)
+        //         pokemonName.textContent = data.name
+        //         pokemonType1.textContent = data.types[0].type.name
+        //         if (data.types.length > 1){
+        //             pokemonType2.textContent = data.types[1].type.name
+        //         }
+        //         console.log(data.types)
+        //         let imgUrl = ""
+                
+        //         if (data.sprites.front_default != null){
+        //             imgUrl = data.sprites.front_default
+        //         } else {
+        //             imgUrl = data.sprites.back_default
+        //         }
+                
+        //         pokemonImage.src = imgUrl
+                
+        //     })
+        //     .catch(err => console.log(err))
+        // }
+
+        // -------------------------------------------------------------------------
+
+        // through ajax : 
+        // const getPokemon = () => {
+
+
+        //     $.ajax({
+        //         url: url,
+        //         type: 'GET',
+        //         success: (data) => {
+        //             pokemonName.textContent = data.name
+        //             pokemonType1.textContent = data.types[0].type.name
+        //             if (data.types.length > 1){
+        //                 pokemonType2.textContent = data.types[1].type.name
+        //             }
+        //             console.log(data.types)
+        //             let imgUrl = ""
+                    
+        //             if (data.sprites.front_default != null){
+        //                 imgUrl = data.sprites.front_default
+        //             } else {
+        //                 imgUrl = data.sprites.back_default
+        //             }
+                    
+        //             pokemonImage.src = imgUrl
+        //         },
+        //         error: (err) => {
+        //             console.log(err)
+        //         }
+        //     })
+        // }
+
+
+    </script>
+</body>
+</html>
+
+<!-- challenge needs  -->
+<!-- a button that when clicked, gets data from pokeAPI -->
+<!-- need to get name, type(s), image/sprite -->

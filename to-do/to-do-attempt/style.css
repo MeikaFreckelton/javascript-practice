@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#header {
+  background-color: lightcyan;
+  width: 100%;
+  text-align: center;
+  padding: 1.5% 0;
+}
+/*# sourceMappingURL=style.css.map */

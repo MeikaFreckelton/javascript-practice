@@ -1,0 +1,18 @@
+{
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "chickens": [
+        {
+            "name": "Sicky",
+            "mood": "ornery"
+        },
+        {
+            "name": "Hungry",
+            "mood": "peck peck peck"
+        },
+        {
+            "name": "Cheeky",
+            "mood": "Actually, cheeky is the most chill of all of them"
+        }
+    ]
+}
